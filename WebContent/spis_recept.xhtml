@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">  
+  	
+    <h:head>
+    	<title>Pharmacy</title>
+    	
+    	<style type="text/css">
+    		.highlightTableRow {
+   				background-color: #6CE26C !important;
+                background-image: none !important;
+                color: #000000 !important;
+			}
+    	</style>
+    </h:head>
+    
+    <h:body>
+        
+		<h:form>
+			
+			<div align="left">
+				<table bgcolor="#8fc400" width="100%">
+					<tr>
+						<td align="left">
+							&nbsp;&nbsp;
+							<p:commandLink action="index" value="Back to main menu" style="color:white; text-decoration:none;"/>
+						</td>
+						<td align="right">
+							<font color="white">
+								|&nbsp;&nbsp;2013&nbsp;&nbsp;&copy;&nbsp;&nbsp;Jakub Bednarski&nbsp;&nbsp;
+							</font>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br/><br/>
+			
+			<div align="center">
+					
+				<p:dataTable var="rec" value="#{spisReceptBean.recepty}">  
+					<p:column style="width:2%">  
+            			<p:rowToggler />  
+        			</p:column>  
+				
+			        <p:column headerText="Number">  
+			            <h:outputText value="#{rec.numer}" />  
+			        </p:column>  
+			  
+			  		<p:column headerText="Payment">  
+			            <h:outputText value="#{rec.odplatnosc}" />  
+			        </p:column>  
+			  
+			  		<p:column headerText="Date of issue">  
+			            <h:outputText value="#{rec.data}">
+			             	<f:convertDateTime pattern="dd-MM-yyyy"/>  
+			            </h:outputText>   
+			        </p:column> 
+			        
+			        <p:column headerText="Execution date from">  
+			            <h:outputText value="#{rec.dataRealizacajiOd}">
+			             	<f:convertDateTime pattern="dd-MM-yyyy"/>  
+			            </h:outputText>  
+			        </p:column> 
+			 
+			 		<p:column headerText="Patient">  
+			            <h:outputText value="#{rec.pacjent}" />  
+			        </p:column> 
+			 
+			 		<p:column headerText="Doctor">  
+			            <h:outputText value="#{rec.lekarz}" />  
+			        </p:column> 
+			 
+			 		<p:rowExpansion>  
+			    		<p:dataTable var="s" value="#{rec.specyfikacja}" style="width:40%;"
+			    			rowStyleClass="#{s.zrealizowane ? 'highlightTableRow' : null}">
+			    			<p:column headerText="Drug">
+			    				<h:outputText value="#{s.nazwa}" /> 
+			    			</p:column>
+			    			
+			    			<p:column headerText="Package">
+			    				<h:outputText value="#{s.opakowanie}" /> 
+			    			</p:column>
+			    			
+			    			<p:column headerText="Dosage">
+			    				<h:outputText value="#{s.zazywanie}" /> 
+			    			</p:column>
+			    			
+			    			<p:column headerText="Realization">
+			    				<h:outputText value="#{s.realizator}"/>
+			    			</p:column>
+			    			
+			    		</p:dataTable>        
+			        </p:rowExpansion>
+			    </p:dataTable> 
+				
+			</div>
+				
+    	</h:form>
+    	
+    </h:body> 
+</html>  

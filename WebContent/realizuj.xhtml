@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">  
+  	
+    <h:head>
+    	<title>Pharmacy</title>
+    	
+    	<style type="text/css">
+    		.highlightTableRow {
+   				background-color: #6CE26C !important;
+                background-image: none !important;
+                color: #000000 !important;
+			}
+    	</style>
+    </h:head>
+    
+    <h:body>
+        
+		<h:form>
+			
+			<div align="left">
+				<table bgcolor="#8fc400" width="100%">
+					<tr>
+						<td align="left">
+							&nbsp;&nbsp;
+							<p:commandLink action="index" value="Back to main manu" style="color:white; text-decoration:none;"/>
+							<font color="white">&nbsp;&nbsp;|&nbsp;&nbsp;</font>
+							<p:commandLink action="realizacja_recepty" value="Back to prescriptions list" style="color:white; text-decoration:none;"/>
+						</td>
+						<td align="right">
+							<font color="white">
+								|&nbsp;&nbsp;2013&nbsp;&nbsp;&copy;&nbsp;&nbsp;Jakub Bednarski&nbsp;&nbsp;
+							</font>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br/><br/>
+			
+			<div align="center">
+			
+				<table>
+					<tr>
+						<td bgcolor="#4AC948" align="center"><b><font color="white">PRESCRIPTION SPECIFICATION</font></b></td>
+					</tr>
+					<tr>
+						<td align="center">
+							<p:dataTable id="specyf" var="s" value="#{realizujBean.specyfikacja}"
+				    			editable="true" editMode="cell" rowStyleClass="#{s.zrealizowane ? 'highlightTableRow' : null}">
+				    			
+				    			<p:column headerText="Drug">
+				    				<h:outputText value="#{s.nazwa}" /> 
+				    			</p:column>
+				    			
+				    			<p:column headerText="Package">
+				    				<h:outputText value="#{s.opakowanie}" /> 
+				    			</p:column>
+				    			
+				    			<p:column headerText="Dosage">
+				    				<h:outputText value="#{s.zazywanie}" /> 
+				    			</p:column>	
+				    			
+				    			<p:column headerText="Realization date">
+				    				<p:cellEditor>
+				    					<f:facet name="output">
+				    						<h:outputText value="#{s.data_realizacji}"><f:convertDateTime pattern="dd-MM-yyyy"/> </h:outputText>
+				    					</f:facet>
+				    					<f:facet name="input"><p:calendar value="#{s.data_realizacji}" pattern="dd-MM-yyy"/></f:facet>
+				    				</p:cellEditor>
+				    			</p:column>	
+				    			
+				    			<p:column headerText="Name">
+				    				<p:cellEditor>
+				    					<f:facet name="output"><h:outputText value="#{s.fImie}" /></f:facet>
+				    					<f:facet name="input"><h:inputText value="#{s.fImie}" /></f:facet>
+				    				</p:cellEditor>
+				    			</p:column>	
+				    			
+				    			<p:column headerText="Surname">
+				    				<p:cellEditor>
+				    					<f:facet name="output"><h:outputText value="#{s.fNazwisko}" /></f:facet>
+				    					<f:facet name="input"><h:inputText value="#{s.fNazwisko}" /></f:facet>
+				    				</p:cellEditor>
+				    			</p:column>	
+				    			
+				    			<p:column headerText="ID">
+				    				<p:cellEditor>
+				    					<f:facet name="output"><h:outputText value="#{s.fIdent}" /></f:facet>
+				    					<f:facet name="input"><h:inputText value="#{s.fIdent}" /></f:facet>
+				    				</p:cellEditor>
+				    			</p:column>	
+				    		</p:dataTable> 
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<h:commandButton value="Save" action="#{realizujBean.zapisz}"/>
+						</td>
+					</tr>
+				</table>
+				
+			</div>
+    	</h:form>
+    	
+    </h:body> 
+</html>  
